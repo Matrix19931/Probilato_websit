@@ -12,7 +12,7 @@ const express = require('express');
 const session = require('express-session');
 
 const app = express();
-
+require('./seed');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
