@@ -8,12 +8,12 @@
     <div class="logo">Probilato</div>
     <div class="sub">CONTROL PANEL</div>
     <nav>
-      <a href="/admin" class="<%= section === 'home' ? 'on' : '' %>">Dashboard</a>
-      <a href="/admin/text" class="<%= section === 'text' ? 'on' : '' %>">Website text</a>
-      <a href="/admin/images" class="<%= section === 'images' ? 'on' : '' %>">Pictures</a>
-      <a href="/admin/pages" class="<%= section === 'pages' ? 'on' : '' %>">Pages</a>
-      <a href="/admin/blog" class="<%= section === 'blog' ? 'on' : '' %>">Blog</a>
-      <a href="/admin/team" class="<%= section === 'team' ? 'on' : '' %>">Team</a>
+      <a href="/admin" class="<%= section === 'home' ? 'on' : '' %>">Overview</a>
+      <div class="navgroup">Pages</div>
+      <% sections.forEach(function (s) { %>
+        <a href="/admin/page/<%= s.id %>" class="<%= current === s.id ? 'on' : '' %>"><%= s.label %></a>
+      <% }) %>
+      <div class="navgroup">Inbox</div>
       <a href="/admin/messages" class="<%= section === 'messages' ? 'on' : '' %>">Messages<% if (unread) { %><span class="pill"><%= unread %></span><% } %></a>
     </nav>
     <div class="foot"><a href="/" target="_blank">View website &rarr;</a><br><a href="/admin/logout">Log out</a></div>

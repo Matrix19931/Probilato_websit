@@ -1,0 +1,95 @@
+<%- include('partials/shell') %>
+<div class="head">
+  <div>
+    <h1><%= section.label %></h1>
+    <p class="hint"><%= section.hint %></p>
+  </div>
+  <a class="btn btn-outline" href="<%= section.view %>" target="_blank">Open this page &rarr;</a>
+</div>
+<% if (saved) { %><div class="saved">Saved. Reload the page on the website to see it.</div><% } %>
+
+<form method="post" action="/admin/page/<%= section.id %>" enctype="multipart/form-data">
+
+  <% (imageRows || []).forEach(function (img) { %>
+    <div class="card">
+      <h2>Picture — <%= img.label %></h2>
+      <div class="row">
+        <img class="thumb" src="<%= img.path %>" alt="">
+        <label>Replace with a new picture<input type="file" name="image__<%= img.key %>" accept="image/*"></label>
+      </div>
+    </div>
+  <% }) %>
+
+  <% (pageRows || []).forEach(function (p) { %>
+    <div class="card">
+      <h2>Page text — <%= p.title_de %></h2>
+      <p class="hint">Leave a blank line between paragraphs. A line starting with “- ” becomes a bullet point.</p>
+      <div class="row">
+        <label>Title (Deutsch)<input type="text" name="page__<%= p.slug %>__title_de" value="<%= p.title_de %>"></label>
+        <label>Title (English)<input type="text" name="page__<%= p.slug %>__title_en" value="<%= p.title_en %>"></label>
+        <label>Intro (Deutsch)<textarea name="page__<%= p.slug %>__intro_de"><%= p.intro_de %></textarea></label>
+        <label>Intro (English)<textarea name="page__<%= p.slug %>__intro_en"><%= p.intro_en %></textarea></label>
+        <label>Text (Deutsch)<textarea rows="14" name="page__<%= p.slug %>__body_de"><%= p.body_de %></textarea></label>
+        <label>Text (English)<textarea rows="14" name="page__<%= p.slug %>__body_en"><%= p.body_en %></textarea></label>
+      </div>
+    </div>
+  <% }) %>
+
+  <% (settingGroups || []).forEach(function (g) { %>
+    <div class="card">
+      <h2><%= g.title %></h2>
+      <% if (g.hint) { %><p class="hint"><%= g.hint %></p><% } %>
+      <% g.rows.forEach(function (r) { %>
+        <div class="field-block">
+          <div class="field-label"><%= r.label %></div>
+          <div class="row">
+            <label>Deutsch
+              <% if (r.kind === 'textarea') { %><textarea name="de_<%= r.key %>"><%= r.value_de %></textarea>
+              <% } else { %><input type="text" name="de_<%= r.key %>" value="<%= r.value_de %>"><% } %>
+            </label>
+            <label>English
+              <% if (r.kind === 'textarea') { %><textarea name="en_<%= r.key %>"><%= r.value_en %></textarea>
+              <% } else { %><input type="text" name="en_<%= r.key %>" value="<%= r.value_en %>"><% } %>
+            </label>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% }) %>
+
+  <% if ((imageRows||[]).length || (pageRows||[]).length || (settingGroups||[]).length) { %>
+    <button class="btn btn-primary" type="submit">Save this page</button>
+  <% } %>
+</form>
+
+<% if (section.team) { %>
+  <div class="card">
+    <div class="head"><h2>People on this page</h2><a class="btn btn-primary" href="/admin/team/new">Add a person</a></div>
+    <table><thead><tr><th>Order</th><th>Name</th><th>Role</th><th></th></tr></thead><tbody>
+    <% teamRows.forEach(function (r) { %>
+      <tr><td><%= r.sort %></td><td><%= r.name %></td><td><%= r.role_de %></td>
+      <td><a class="btn btn-outline" href="/admin/team/<%= r.id %>">Edit</a>
+        <form style="display:inline" method="post" action="/admin/team/<%= r.id %>/delete" onsubmit="return confirm('Remove this person?')">
+          <button class="btn btn-danger" type="submit">Delete</button></form></td></tr>
+    <% }) %>
+    </tbody></table>
+  </div>
+<% } %>
+
+<% if (section.blog) { %>
+  <div class="card">
+    <div class="head"><h2>Blog posts</h2><a class="btn btn-primary" href="/admin/blog/new">Write a new post</a></div>
+    <table><thead><tr><th>Date</th><th>Title</th><th>Status</th><th></th></tr></thead><tbody>
+    <% blogRows.forEach(function (r) { %>
+      <tr><td><%= r.created_at.slice(0,10) %></td>
+        <td><%= r.title_de %><br><span class="hint"><%= r.title_en %></span></td>
+        <td><span class="tag"><%= r.published ? 'published' : 'draft' %></span></td>
+        <td><a class="btn btn-outline" href="/admin/blog/<%= r.id %>">Edit</a>
+          <form style="display:inline" method="post" action="/admin/blog/<%= r.id %>/delete" onsubmit="return confirm('Delete this post?')">
+            <button class="btn btn-danger" type="submit">Delete</button></form></td></tr>
+    <% }) %>
+    </tbody></table>
+  </div>
+<% } %>
+
+<%- include('partials/shell-end') %>

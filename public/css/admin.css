@@ -35,3 +35,10 @@ th{font-family:"Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform
 .login{max-width:360px;margin:12vh auto;background:#fbf8f4;border:1px solid var(--line);padding:30px}
 .tag{font-family:"Barlow Condensed",sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:2px 8px;color:#6b7488}
 .unreadrow{background:rgba(176,128,138,.09)}
+
+.navgroup{font-family:"Barlow Condensed",sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#7d8ba6;margin:18px 0 6px 12px}
+.field-block{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.field-block:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.field-label{font-family:"Barlow Condensed",sans-serif;font-size:18px;color:var(--navy);margin-bottom:8px}
+.head .btn{white-space:nowrap}
+.card .head{margin-bottom:16px}

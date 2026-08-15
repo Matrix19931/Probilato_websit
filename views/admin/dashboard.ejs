@@ -1,10 +1,19 @@
 <%- include('partials/shell') %>
-<h1>Welcome</h1>
-<p class="hint">Everything on the website is edited from here. Changes are live as soon as you press Save.</p>
+<h1>Your website</h1>
+<p class="hint">Pick the page you want to change. Each screen holds that page’s text and pictures together, exactly as they appear on the website.</p>
 <div class="row">
-  <div class="card"><h2>Blog</h2><p><%= counts.posts %> posts</p><a class="btn btn-outline" href="/admin/blog">Manage blog</a></div>
-  <div class="card"><h2>Messages</h2><p><%= counts.unread %> unread of <%= counts.messages %></p><a class="btn btn-outline" href="/admin/messages">Read messages</a></div>
-  <div class="card"><h2>Text &amp; pictures</h2><p>Homepage headline, texts, photos.</p><a class="btn btn-outline" href="/admin/text">Edit text</a> <a class="btn btn-outline" href="/admin/images">Edit pictures</a></div>
-  <div class="card"><h2>Team</h2><p><%= counts.team %> people</p><a class="btn btn-outline" href="/admin/team">Manage team</a></div>
+  <% sections.forEach(function (s) { %>
+    <div class="card">
+      <h2><%= s.label %></h2>
+      <p class="hint"><%= s.hint %></p>
+      <a class="btn btn-outline" href="/admin/page/<%= s.id %>">Edit</a>
+      <a class="btn btn-outline" href="<%= s.view %>" target="_blank">View</a>
+    </div>
+  <% }) %>
+  <div class="card">
+    <h2>Messages</h2>
+    <p class="hint"><%= counts.unread %> unread of <%= counts.messages %> sent through the contact form.</p>
+    <a class="btn btn-outline" href="/admin/messages">Open inbox</a>
+  </div>
 </div>
 <%- include('partials/shell-end') %>
