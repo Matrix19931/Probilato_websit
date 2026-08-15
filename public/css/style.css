@@ -1,0 +1,139 @@
+/* Probilato — one stylesheet for the whole public site.
+   Colours: navy #22355c on cream #f4efe8, berry #b0808a as the accent.
+   Headings: Barlow Condensed. Body: Barlow. */
+
+:root{
+  --navy:#22355c; --navy-dark:#16233d; --ink:#1b2233; --body:#454f66; --muted:#6b7488;
+  --cream:#f4efe8; --line:rgba(34,53,92,.16); --berry:#b0808a; --deep:#1a2740; --paper:#f7f3ed;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"Barlow",system-ui,sans-serif;font-size:17px;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:var(--navy);text-decoration:none}
+a:hover{color:var(--berry)}
+:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+::selection{background:#dcd2c4}
+h1,h2,h3{font-family:"Barlow Condensed",system-ui,sans-serif;font-weight:600;color:var(--navy);margin:0 0 16px;line-height:1.04}
+h1{font-size:64px}h2{font-size:38px}h3{font-size:26px}
+p{margin:0 0 14px;color:var(--body);text-wrap:pretty}
+.wrap{max-width:1400px;margin:0 auto;padding:0 40px}
+.kicker{font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.28em;text-transform:uppercase;color:var(--berry);margin-bottom:20px}
+.kicker.light{color:#9fb2d4}
+.num{font-family:"Barlow Condensed",sans-serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--berry);margin-bottom:14px}
+.lead{font-size:19px;line-height:1.6}
+.meta{font-family:"Barlow Condensed",sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--berry);margin-bottom:14px}
+.small{font-size:14.5px;color:var(--muted)}
+.more{font-family:"Barlow Condensed",sans-serif;font-size:16px;letter-spacing:.1em;text-transform:uppercase}
+
+/* buttons — square corners, one solid navy primary */
+.btn{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-size:18px;letter-spacing:.1em;text-transform:uppercase;padding:14px 28px;border:1px solid transparent}
+.btn-primary{background:var(--navy);color:var(--paper)}
+.btn-primary:hover{background:var(--navy-dark);color:var(--paper)}
+.btn-outline{border-color:rgba(34,53,92,.4);color:var(--navy)}
+.btn-outline:hover{background:rgba(34,53,92,.06)}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:20;background:rgba(244,239,232,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-inner{display:flex;align-items:center;gap:32px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.brand img{height:46px;width:auto;mix-blend-mode:multiply}
+.main-nav{display:flex;gap:22px;margin-left:auto;font-family:"Barlow Condensed",sans-serif;font-size:17px;letter-spacing:.06em;text-transform:uppercase}
+.main-nav a{color:#3c4560;white-space:nowrap}
+.main-nav a.on{color:var(--navy);border-bottom:2px solid var(--navy)}
+.header-right{display:flex;align-items:center;gap:14px}
+.lang{display:flex;border:1px solid rgba(34,53,92,.3);font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.08em}
+.lang a{padding:7px 12px;color:#3c4560}
+.lang a.on{background:var(--navy);color:var(--paper)}
+.header-right .btn{font-size:16px;padding:11px 22px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1.15fr;border-bottom:1px solid var(--line)}
+.hero-copy{padding:80px 56px 80px 0;display:flex;flex-direction:column;justify-content:center}
+.hero-copy .lead{max-width:44ch;margin-bottom:34px}
+.actions{display:flex;gap:14px;flex-wrap:wrap}
+.badges{margin-top:52px;display:flex;gap:34px;flex-wrap:wrap;font-family:"Barlow Condensed",sans-serif;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.hero-figure{margin:0;position:relative;border-left:1px solid var(--line)}
+.hero-figure img{width:100%;height:100%;min-height:520px;object-fit:cover;object-position:50% 42%}
+
+/* grids */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.grid-4>article{padding:56px 34px;border-right:1px solid var(--line)}
+.grid-4>article:first-child{padding-left:0}
+.grid-4>article:last-child{padding-right:0;border-right:0}
+.grid-4 h2{font-size:30px}
+.grid-4 ul{margin:0;padding:0;list-style:none}
+.grid-4 li{color:var(--body);padding-left:18px;position:relative;margin-bottom:8px}
+.grid-4 li:before{content:"—";position:absolute;left:0;color:var(--berry)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr)}
+.grid-3>article{padding:34px 30px 44px;border-right:1px solid var(--line)}
+.grid-3>article:first-child{padding-left:0}
+.grid-3>article:last-child{padding-right:0;border-right:0}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;padding:70px 0 22px;border-bottom:1px solid var(--line)}
+.section-head h2{margin:0;font-size:44px}
+.posts{border-bottom:1px solid var(--line)}
+.post-image{width:100%;height:200px;object-fit:cover;margin-bottom:18px;border:1px solid var(--line)}
+.closing{border-bottom:1px solid var(--line)}
+.closing>article{padding-top:60px;padding-bottom:60px}
+
+/* dark band */
+.band{background:var(--deep);color:#c6cede}
+.band-inner{display:grid;grid-template-columns:.85fr 1.15fr;align-items:center;padding-left:0;padding-right:0}
+.band-figure{margin:0}
+.band-figure img{width:100%;max-height:520px;object-fit:cover}
+.band-copy{padding:76px 40px 76px 64px}
+.band-copy h2{color:var(--cream);font-size:52px}
+.band-copy .lead{color:#c6cede;max-width:56ch;margin-bottom:40px}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(244,239,232,.2)}
+.benefits>div{padding:24px 18px 0 0}
+.benefits h3{color:var(--cream);font-size:22px;margin-bottom:6px}
+.benefits p{color:#a9b4c9;font-size:14.5px;line-height:1.55;margin:0}
+.benefits .num{color:#9fb2d4}
+
+/* article pages */
+.article{padding:70px 40px 90px}
+.article.narrow{max-width:820px}
+.prose p{font-size:17.5px}
+.prose ul{padding-left:20px;color:var(--body)}
+.prose li{margin-bottom:8px}
+.team-grid{margin-top:50px;border-top:1px solid var(--line)}
+.team-grid>article{padding-top:34px}
+.portrait{width:100%;max-width:180px;height:220px;object-fit:cover;border:1px solid rgba(34,53,92,.25);margin-bottom:16px}
+.portrait.placeholder{display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#7b8296;text-align:center;
+  background:repeating-linear-gradient(135deg,#e6ddd1 0 6px,#efe8de 6px 12px)}
+.founder{display:flex;gap:22px;align-items:flex-start}
+.founder .portrait{flex:0 0 132px;height:168px;margin:0}
+.contact-list{display:flex;flex-direction:column;gap:8px;color:var(--body)}
+.contact-list.big{font-size:19px;margin-top:20px}
+
+/* contact form */
+.contact-page{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.form-side form{display:flex;flex-direction:column;gap:16px}
+.form-side label{display:flex;flex-direction:column;gap:6px;font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.form-side input,.form-side textarea{font-family:"Barlow",sans-serif;font-size:16px;padding:12px;border:1px solid rgba(34,53,92,.3);background:#fbf8f4;color:var(--ink)}
+.form-side button{align-self:flex-start;cursor:pointer}
+.notice{border:1px solid var(--navy);background:rgba(34,53,92,.06);padding:14px 16px;margin-bottom:20px}
+.notice.error{border-color:var(--berry);background:rgba(176,128,138,.1)}
+
+/* footer */
+.site-footer{background:var(--deep);color:#c6cede}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-top:40px;padding-bottom:40px}
+.footer-brand{font-family:"Barlow Condensed",sans-serif;font-size:26px;color:var(--cream)}
+.footer-brand span{display:block;font-size:12px;letter-spacing:.24em;color:#8fa0c0}
+.footer-nav{display:flex;gap:22px;flex-wrap:wrap;font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.08em;text-transform:uppercase}
+.footer-nav a,.footer-legal a{color:#c6cede}
+.footer-legal{font-size:13.5px;color:#8fa0c0;text-align:right}
+
+@media (max-width:1100px){
+  h1{font-size:46px}.band-copy h2{font-size:38px}
+  .hero,.band-inner,.contact-page{grid-template-columns:1fr}
+  .hero-copy{padding:56px 0}
+  .hero-figure{border-left:0}
+  .band-copy{padding:56px 0}
+  .grid-4,.grid-3,.benefits{grid-template-columns:repeat(2,1fr)}
+  .grid-4>article,.grid-3>article{padding:34px 22px;border-right:0;border-bottom:1px solid var(--line)}
+  .wrap{padding:0 22px}
+}
+@media (max-width:640px){
+  .grid-4,.grid-3,.benefits{grid-template-columns:1fr}
+  .main-nav{gap:14px;font-size:15px}
+  .footer-legal{text-align:left}
+}

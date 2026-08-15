@@ -1,0 +1,21 @@
+<%- include('partials/shell') %>
+<h1>Messages</h1>
+<p class="hint">Everything sent through the contact form on the website.</p>
+<table><thead><tr><th>Received</th><th>From</th><th>Message</th><th></th></tr></thead><tbody>
+<% rows.forEach(function (r) { %>
+  <tr class="<%= r.is_read ? '' : 'unreadrow' %>">
+    <td><%= r.created_at %></td>
+    <td><%= r.name %><br><a href="mailto:<%= r.email %>"><%= r.email %></a></td>
+    <td><% if (r.subject) { %><strong><%= r.subject %></strong><br><% } %><%= r.body %></td>
+    <td>
+      <% if (!r.is_read) { %>
+        <form method="post" action="/admin/messages/<%= r.id %>/read"><button class="btn btn-outline" type="submit">Mark read</button></form>
+      <% } %>
+      <form method="post" action="/admin/messages/<%= r.id %>/delete" onsubmit="return confirm('Delete this message?')">
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+<% }) %>
+</tbody></table>
+<%- include('partials/shell-end') %>

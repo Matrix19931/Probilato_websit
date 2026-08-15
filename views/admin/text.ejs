@@ -1,0 +1,23 @@
+<%- include('partials/shell') %>
+<div class="head"><h1>Website text</h1><a class="btn btn-outline" href="/" target="_blank">Preview site</a></div>
+<p class="hint">Left column is German (shown by default), right column English. Leave English empty to reuse the German text.</p>
+<% if (saved) { %><div class="saved">Saved.</div><% } %>
+<form method="post" action="/admin/text">
+  <% rows.forEach(function (r) { %>
+    <div class="card">
+      <h2><%= r.label %></h2>
+      <div class="row">
+        <label>Deutsch
+          <% if (r.kind === 'textarea') { %><textarea name="de_<%= r.key %>"><%= r.value_de %></textarea>
+          <% } else { %><input type="text" name="de_<%= r.key %>" value="<%= r.value_de %>"><% } %>
+        </label>
+        <label>English
+          <% if (r.kind === 'textarea') { %><textarea name="en_<%= r.key %>"><%= r.value_en %></textarea>
+          <% } else { %><input type="text" name="en_<%= r.key %>" value="<%= r.value_en %>"><% } %>
+        </label>
+      </div>
+    </div>
+  <% }) %>
+  <button class="btn btn-primary" type="submit">Save all text</button>
+</form>
+<%- include('partials/shell-end') %>

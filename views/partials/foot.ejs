@@ -1,0 +1,21 @@
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">Probilato<span>PROBIOTISCHES SPEISEEIS</span></div>
+    <nav class="footer-nav">
+      <a href="<%= url('/ueber-uns') %>"><%= t.nav_who %></a>
+      <a href="<%= url('/vision') %>"><%= t.nav_vision %></a>
+      <a href="<%= url('/investieren') %>"><%= t.nav_invest %></a>
+      <a href="<%= url('/probiotika') %>"><%= t.nav_probiotics %></a>
+      <a href="<%= url('/blog') %>"><%= t.nav_blog %></a>
+      <a href="<%= url('/kontakt') %>"><%= t.nav_contact %></a>
+    </nav>
+    <div class="footer-legal">
+      &copy; <%= new Date().getFullYear() %> Probilato. <%= t.rights %><br>
+      <a href="<%= url('/impressum') %>"><%= t.imprint %></a> &middot;
+      <a href="<%= url('/datenschutz') %>"><%= t.privacy %></a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

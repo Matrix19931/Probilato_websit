@@ -1,0 +1,25 @@
+<%- include('partials/shell') %>
+<div class="head"><h1><%= isNew ? 'New post' : 'Edit post' %></h1><a class="btn btn-outline" href="/admin/blog">Back</a></div>
+<form method="post" action="/admin/blog/<%= isNew ? 'new' : row.id %>" enctype="multipart/form-data">
+  <input type="hidden" name="current_image" value="<%= row.image || '' %>">
+  <div class="card"><div class="row">
+    <label>Title (Deutsch)<input type="text" name="title_de" value="<%= row.title_de || '' %>" required></label>
+    <label>Title (English)<input type="text" name="title_en" value="<%= row.title_en || '' %>"></label>
+    <label>Short summary (Deutsch)<textarea name="excerpt_de"><%= row.excerpt_de || '' %></textarea></label>
+    <label>Short summary (English)<textarea name="excerpt_en"><%= row.excerpt_en || '' %></textarea></label>
+    <label>Text (Deutsch)<textarea name="body_de" rows="14"><%= row.body_de || '' %></textarea></label>
+    <label>Text (English)<textarea name="body_en" rows="14"><%= row.body_en || '' %></textarea></label>
+    <label>Category<input type="text" name="category" value="<%= row.category || '' %>"></label>
+    <label>Web address (leave empty to generate)<input type="text" name="slug" value="<%= row.slug || '' %>"></label>
+  </div></div>
+  <div class="card">
+    <h2>Picture</h2>
+    <% if (row.image) { %><img class="thumb" src="<%= row.image %>" alt=""><% } %>
+    <label>Upload a picture<input type="file" name="image" accept="image/*"></label>
+    <label style="flex-direction:row;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-size:16px">
+      <input type="checkbox" name="published" value="1" <%= row.published ? 'checked' : '' %> style="width:auto"> Visible on the website
+    </label>
+  </div>
+  <button class="btn btn-primary" type="submit">Save post</button>
+</form>
+<%- include('partials/shell-end') %>

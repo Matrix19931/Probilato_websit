@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' — Probilato' : (settings.meta_title || 'Probilato — Probiotisches Speiseeis') %></title>
+<meta name="description" content="<%= settings.meta_description || '' %>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="<%= url('/') %>"><img src="<%= images.logo || '/images/logo-paper.png' %>" alt="Probilato"></a>
+    <nav class="main-nav">
+      <a href="<%= url('/') %>" class="<%= path === '/' ? 'on' : '' %>"><%= t.nav_home %></a>
+      <a href="<%= url('/ueber-uns') %>" class="<%= path.startsWith('/ueber-uns') ? 'on' : '' %>"><%= t.nav_who %></a>
+      <a href="<%= url('/vision') %>" class="<%= path.startsWith('/vision') ? 'on' : '' %>"><%= t.nav_vision %></a>
+      <a href="<%= url('/investieren') %>" class="<%= path.startsWith('/investieren') ? 'on' : '' %>"><%= t.nav_invest %></a>
+      <a href="<%= url('/probiotika') %>" class="<%= path.startsWith('/probiotika') ? 'on' : '' %>"><%= t.nav_probiotics %></a>
+      <a href="<%= url('/blog') %>" class="<%= path.startsWith('/blog') ? 'on' : '' %>"><%= t.nav_blog %></a>
+      <a href="<%= url('/team') %>" class="<%= path.startsWith('/team') ? 'on' : '' %>"><%= t.nav_team %></a>
+    </nav>
+    <div class="header-right">
+      <div class="lang">
+        <a href="<%= lang === 'de' ? path : other(path) %>" class="<%= lang === 'de' ? 'on' : '' %>">DE</a>
+        <a href="<%= lang === 'en' ? (path === '/' ? '/en' : '/en' + path) : other(path) %>" class="<%= lang === 'en' ? 'on' : '' %>">EN</a>
+      </div>
+      <a class="btn btn-primary" href="<%= url('/kontakt') %>"><%= t.cta_contact %></a>
+    </div>
+  </div>
+</header>
+<main>

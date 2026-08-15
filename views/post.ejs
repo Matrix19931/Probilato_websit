@@ -1,0 +1,10 @@
+<%- include('partials/head', { pageTitle: post.title }) %>
+<article class="wrap article narrow">
+  <div class="meta"><%= new Date(post.created_at).toLocaleDateString(lang === 'en' ? 'en-GB' : 'de-DE') %><% if (post.category) { %> &middot; <%= post.category %><% } %></div>
+  <h1><%= post.title %></h1>
+  <% if (post.excerpt) { %><p class="lead"><%= post.excerpt %></p><% } %>
+  <% if (post.image) { %><img class="post-image" src="<%= post.image %>" alt=""><% } %>
+  <div class="prose"><%- toHtml(post.body) %></div>
+  <a class="more" href="<%= url('/blog') %>">&larr; <%= t.all_posts %></a>
+</article>
+<%- include('partials/foot') %>

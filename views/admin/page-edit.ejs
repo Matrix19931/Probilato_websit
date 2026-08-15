@@ -1,0 +1,16 @@
+<%- include('partials/shell') %>
+<div class="head"><h1><%= row.title_de %></h1><a class="btn btn-outline" href="/admin/pages">Back</a></div>
+<% if (saved) { %><div class="saved">Saved.</div><% } %>
+<p class="hint">In the body: leave a blank line between paragraphs. A line that starts with “- ” becomes a bullet point.</p>
+<form method="post" action="/admin/pages/<%= row.slug %>">
+  <div class="card"><div class="row">
+    <label>Title (Deutsch)<input type="text" name="title_de" value="<%= row.title_de %>"></label>
+    <label>Title (English)<input type="text" name="title_en" value="<%= row.title_en %>"></label>
+    <label>Intro (Deutsch)<textarea name="intro_de"><%= row.intro_de %></textarea></label>
+    <label>Intro (English)<textarea name="intro_en"><%= row.intro_en %></textarea></label>
+    <label>Body (Deutsch)<textarea name="body_de" rows="14"><%= row.body_de %></textarea></label>
+    <label>Body (English)<textarea name="body_en" rows="14"><%= row.body_en %></textarea></label>
+  </div></div>
+  <button class="btn btn-primary" type="submit">Save page</button>
+</form>
+<%- include('partials/shell-end') %>

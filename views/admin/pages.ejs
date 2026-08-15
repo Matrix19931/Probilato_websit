@@ -1,0 +1,10 @@
+<%- include('partials/shell') %>
+<h1>Pages</h1>
+<p class="hint">The text of each sub-page. The homepage is edited under “Website text”.</p>
+<table><thead><tr><th>Page</th><th>German title</th><th>English title</th><th></th></tr></thead><tbody>
+<% rows.forEach(function (r) { %>
+  <tr><td><span class="tag"><%= r.slug %></span></td><td><%= r.title_de %></td><td><%= r.title_en %></td>
+  <td><a class="btn btn-outline" href="/admin/pages/<%= r.slug %>">Edit</a></td></tr>
+<% }) %>
+</tbody></table>
+<%- include('partials/shell-end') %>

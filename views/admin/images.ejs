@@ -1,0 +1,17 @@
+<%- include('partials/shell') %>
+<h1>Pictures</h1>
+<p class="hint">Upload a new picture to replace the one in a slot. JPG or PNG, up to 8 MB. Wide photos work best.</p>
+<% if (saved) { %><div class="saved">Picture replaced.</div><% } %>
+<% rows.forEach(function (r) { %>
+  <div class="card">
+    <h2><%= r.label %></h2>
+    <div class="row">
+      <img class="thumb" src="<%= r.path %>" alt="">
+      <form method="post" action="/admin/images/<%= r.key %>" enctype="multipart/form-data">
+        <label>New picture<input type="file" name="file" accept="image/*" required></label>
+        <button class="btn btn-primary" type="submit">Replace</button>
+      </form>
+    </div>
+  </div>
+<% }) %>
+<%- include('partials/shell-end') %>

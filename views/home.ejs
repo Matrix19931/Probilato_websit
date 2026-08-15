@@ -1,0 +1,102 @@
+<%- include('partials/head') %>
+
+<section class="hero wrap">
+  <div class="hero-copy">
+    <div class="kicker"><%= settings.hero_kicker %></div>
+    <h1><%= settings.hero_headline %></h1>
+    <p class="lead"><%= settings.hero_text %></p>
+    <div class="actions">
+      <a class="btn btn-primary" href="<%= url('/probiotika') %>"><%= settings.hero_button_1 %></a>
+      <a class="btn btn-outline" href="<%= url('/kontakt') %>"><%= settings.hero_button_2 %></a>
+    </div>
+    <div class="badges">
+      <span><%= settings.badge_1 %></span><span><%= settings.badge_2 %></span><span><%= settings.badge_3 %></span>
+    </div>
+  </div>
+  <figure class="hero-figure">
+    <img src="<%= images.hero || '/images/hero-scoop.png' %>" alt="">
+  </figure>
+</section>
+
+<section class="wrap grid-4">
+  <article>
+    <div class="num">01</div><h2><%= settings.col1_title %></h2>
+    <%- toHtml(settings.col1_text) %>
+  </article>
+  <article>
+    <div class="num">02</div><h2><%= settings.col2_title %></h2>
+    <%- toHtml(settings.col2_text) %>
+  </article>
+  <article>
+    <div class="num">03</div><h2><%= settings.col3_title %></h2>
+    <%- toHtml(settings.col3_text) %>
+  </article>
+  <article>
+    <div class="num">04</div><h2><%= settings.col4_title %></h2>
+    <%- toHtml(settings.col4_text) %>
+  </article>
+</section>
+
+<section class="band">
+  <div class="wrap band-inner">
+    <figure class="band-figure"><img src="<%= images.probiotics || '/images/cup.png' %>" alt=""></figure>
+    <div class="band-copy">
+      <div class="kicker light"><%= settings.probiotics_kicker %></div>
+      <h2><%= settings.probiotics_title %></h2>
+      <p class="lead"><%= settings.probiotics_text %></p>
+      <div class="benefits">
+        <div><span class="num">01</span><h3><%= settings.benefit_1_title %></h3><p><%= settings.benefit_1_text %></p></div>
+        <div><span class="num">02</span><h3><%= settings.benefit_2_title %></h3><p><%= settings.benefit_2_text %></p></div>
+        <div><span class="num">03</span><h3><%= settings.benefit_3_title %></h3><p><%= settings.benefit_3_text %></p></div>
+        <div><span class="num">04</span><h3><%= settings.benefit_4_title %></h3><p><%= settings.benefit_4_text %></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2><%= t.blog_title %></h2>
+    <a href="<%= url('/blog') %>" class="more"><%= t.all_posts %></a>
+  </div>
+  <div class="grid-3 posts">
+    <% posts.forEach(function (p) { %>
+      <article>
+        <div class="meta"><%= new Date(p.created_at).toLocaleDateString(lang === 'en' ? 'en-GB' : 'de-DE') %><% if (p.category) { %> &middot; <%= p.category %><% } %></div>
+        <h3><a href="<%= url('/blog/' + p.slug) %>"><%= p.title %></a></h3>
+        <p><%= p.excerpt %></p>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<section class="wrap grid-3 closing">
+  <article>
+    <div class="num"><%= settings.founder_kicker %></div>
+    <div class="founder">
+      <% if (founder && founder.photo) { %><img class="portrait" src="<%= founder.photo %>" alt=""><% } else { %><div class="portrait placeholder">founder<br>portrait</div><% } %>
+      <div>
+        <h3><%= founder ? founder.name : '' %></h3>
+        <p><%= founder ? founder.bio : '' %></p>
+      </div>
+    </div>
+  </article>
+  <article>
+    <div class="num"><%= settings.rd_kicker %></div>
+    <h3><%= settings.rd_title %></h3>
+    <p><%= settings.rd_text %></p>
+    <a class="more" href="<%= url('/team') %>"><%= t.nav_team %> &rarr;</a>
+  </article>
+  <article>
+    <div class="num"><%= t.nav_contact %></div>
+    <h3><%= settings.contact_title %></h3>
+    <div class="contact-list">
+      <a href="mailto:<%= settings.contact_email %>"><%= settings.contact_email %></a>
+      <span><%= settings.contact_phone %></span>
+      <span><%= settings.contact_address %></span>
+      <span class="small"><%= settings.contact_register %></span>
+    </div>
+  </article>
+</section>
+
+<%- include('partials/foot') %>

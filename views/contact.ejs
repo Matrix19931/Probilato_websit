@@ -1,0 +1,24 @@
+<%- include('partials/head', { pageTitle: t.nav_contact }) %>
+<section class="wrap article contact-page">
+  <div>
+    <h1><%= settings.contact_title %></h1>
+    <div class="contact-list big">
+      <a href="mailto:<%= settings.contact_email %>"><%= settings.contact_email %></a>
+      <span><%= settings.contact_phone %></span>
+      <span><%= settings.contact_address %></span>
+      <span class="small"><%= settings.contact_register %></span>
+    </div>
+  </div>
+  <div class="form-side">
+    <% if (sent) { %><div class="notice"><%= t.form_thanks %></div><% } %>
+    <% if (error) { %><div class="notice error"><%= error %></div><% } %>
+    <form method="post" action="<%= url('/kontakt') %>">
+      <label><%= t.form_name %><input name="name" value="<%= form.name || '' %>" required></label>
+      <label><%= t.form_email %><input type="email" name="email" value="<%= form.email || '' %>" required></label>
+      <label><%= t.form_subject %><input name="subject" value="<%= form.subject || '' %>"></label>
+      <label><%= t.form_message %><textarea name="body" rows="7" required><%= form.body || '' %></textarea></label>
+      <button class="btn btn-primary" type="submit"><%= t.form_send %></button>
+    </form>
+  </div>
+</section>
+<%- include('partials/foot') %>

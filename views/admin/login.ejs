@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in — Probilato admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/admin.css"></head><body>
+<form class="login" method="post" action="/admin/login">
+  <h1>Probilato</h1>
+  <p class="hint">Control panel</p>
+  <% if (error) { %><div class="saved"><%= error %></div><% } %>
+  <label>User name<input type="text" name="user" autofocus required></label>
+  <label>Password<input type="password" name="password" required></label>
+  <button class="btn btn-primary" type="submit">Log in</button>
+</form>
+</body></html>

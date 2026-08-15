@@ -1,0 +1,19 @@
+<%- include('partials/shell') %>
+<div class="head"><h1><%= isNew ? 'Add a person' : 'Edit person' %></h1><a class="btn btn-outline" href="/admin/team">Back</a></div>
+<form method="post" action="/admin/team/<%= isNew ? 'new' : row.id %>" enctype="multipart/form-data">
+  <input type="hidden" name="current_photo" value="<%= row.photo || '' %>">
+  <div class="card"><div class="row">
+    <label>Name<input type="text" name="name" value="<%= row.name || '' %>" required></label>
+    <label>Order on the page (0 = first)<input type="text" name="sort" value="<%= row.sort || 0 %>"></label>
+    <label>Role (Deutsch)<input type="text" name="role_de" value="<%= row.role_de || '' %>"></label>
+    <label>Role (English)<input type="text" name="role_en" value="<%= row.role_en || '' %>"></label>
+    <label>Short bio (Deutsch)<textarea name="bio_de"><%= row.bio_de || '' %></textarea></label>
+    <label>Short bio (English)<textarea name="bio_en"><%= row.bio_en || '' %></textarea></label>
+  </div></div>
+  <div class="card"><h2>Photo</h2>
+    <% if (row.photo) { %><img class="thumb" src="<%= row.photo %>" alt=""><% } %>
+    <label>Upload a photo<input type="file" name="photo" accept="image/*"></label>
+  </div>
+  <button class="btn btn-primary" type="submit">Save person</button>
+</form>
+<%- include('partials/shell-end') %>

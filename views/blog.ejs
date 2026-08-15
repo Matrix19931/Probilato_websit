@@ -1,0 +1,16 @@
+<%- include('partials/head', { pageTitle: t.blog_title }) %>
+<section class="wrap article">
+  <h1><%= t.blog_title %></h1>
+  <div class="grid-3 posts">
+    <% posts.forEach(function (p) { %>
+      <article>
+        <% if (p.image) { %><a href="<%= url('/blog/' + p.slug) %>"><img class="post-image" src="<%= p.image %>" alt=""></a><% } %>
+        <div class="meta"><%= new Date(p.created_at).toLocaleDateString(lang === 'en' ? 'en-GB' : 'de-DE') %><% if (p.category) { %> &middot; <%= p.category %><% } %></div>
+        <h3><a href="<%= url('/blog/' + p.slug) %>"><%= p.title %></a></h3>
+        <p><%= p.excerpt %></p>
+        <a class="more" href="<%= url('/blog/' + p.slug) %>"><%= t.read_more %> &rarr;</a>
+      </article>
+    <% }) %>
+  </div>
+</section>
+<%- include('partials/foot') %>

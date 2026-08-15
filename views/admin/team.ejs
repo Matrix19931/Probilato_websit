@@ -1,0 +1,14 @@
+<%- include('partials/shell') %>
+<div class="head"><h1>Team</h1><a class="btn btn-primary" href="/admin/team/new">Add a person</a></div>
+<table><thead><tr><th>Order</th><th>Name</th><th>Role</th><th></th></tr></thead><tbody>
+<% rows.forEach(function (r) { %>
+  <tr><td><%= r.sort %></td><td><%= r.name %></td><td><%= r.role_de %></td>
+  <td>
+    <a class="btn btn-outline" href="/admin/team/<%= r.id %>">Edit</a>
+    <form style="display:inline" method="post" action="/admin/team/<%= r.id %>/delete" onsubmit="return confirm('Remove this person?')">
+      <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+  </td></tr>
+<% }) %>
+</tbody></table>
+<%- include('partials/shell-end') %>
