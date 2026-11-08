@@ -44,7 +44,7 @@ const settings = [
   ['rd_text',        'Homepage — research text', 'Unser Team aus Wissenschaftlerinnen, Mikrobiologen und Ernährungsexperten entwickelt innovative probiotische Stämme und funktionelle Rezepturen nach höchsten Qualitätsstandards.', 'Our team of scientists, microbiologists and nutrition experts develops innovative probiotic strains and functional formulations backed by quality standards.', 'textarea', 53],
 
   ['contact_title',    'Contact — title', 'Sprechen Sie mit uns', 'Talk to us', 'text', 60],
-  ['contact_email',    'Contact — email address', 'info@probilato.com', 'info@probilato.com', 'text', 61],
+  ['contact_email',    'Contact — email address', 'support@probilato.com', 'support@probilato.com', 'text', 61],
   ['contact_phone',    'Contact — phone number', '+49 123 456 7890', '+49 123 456 7890', 'text', 62],
   ['contact_address',  'Contact — address', 'Deutschland', 'Germany', 'text', 63],
   ['contact_register', 'Contact — company register', 'Handelsregister-Nr. HRB 123456', 'Commercial Register No. HRB 123456', 'text', 64],

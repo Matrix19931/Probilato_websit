@@ -6,6 +6,7 @@ const express = require('express');
 const { db, S, IMG } = require('../db');
 const t = require('../lib/i18n');
 const { toHtml } = require('../lib/text');
+const { sendSupportEmails } = require('../lib/mail');
 
 const router = express.Router();
 
@@ -72,16 +73,46 @@ function post(req, res, next) {
   res.render('post', { post: localisePost(row, res.locals.lang) });
 }
 
-function contactGet(req, res) { res.render('contact', { sent: 'sent' in req.query, error: null, form: {} }); }
+function contactGet(req, res) {
+  const ref = parseInt(req.query.sent, 10);
+  res.render('contact', { sent: 'sent' in req.query, ref: ref > 0 ? ref : null, error: null, form: {} });
+}
+
+/* Simple protection against spam bots: max 5 requests per visitor per hour. */
+const recent = new Map();
+function tooMany(ip) {
+  const now = Date.now(), hour = 60 * 60 * 1000;
+  const list = (recent.get(ip) || []).filter(ts => now - ts < hour);
+  list.push(now);
+  recent.set(ip, list);
+  if (recent.size > 5000) recent.clear();
+  return list.length > 5;
+}
+
+const EMAIL_RE = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/;
 
 function contactPost(req, res) {
-  const { name, email, subject, body } = req.body;
-  if (!name || !email || !body) {
-    return res.status(400).render('contact', { sent: false, error: res.locals.t.form_error, form: req.body });
+  const { name, email, subject, body, website } = req.body;
+  // "website" is a hidden field people never see; bots fill it in.
+  if (website) return res.redirect(res.locals.url('/kontakt') + '?sent=1');
+  if (!name || !email || !body || !EMAIL_RE.test(String(email).trim())) {
+    return res.status(400).render('contact', { sent: false, ref: null, error: res.locals.t.form_error, form: req.body });
   }
-  db.prepare('INSERT INTO messages (name,email,subject,body) VALUES (?,?,?,?)')
-    .run(name.trim(), email.trim(), (subject || '').trim(), body.trim());
-  res.redirect(res.locals.url('/kontakt') + '?sent=1');
+  if (tooMany(req.ip)) {
+    return res.status(429).render('contact', { sent: false, ref: null, error: res.locals.t.form_too_many, form: req.body });
+  }
+  const m = {
+    name: String(name).trim().slice(0, 200),
+    email: String(email).trim().slice(0, 200),
+    subject: String(subject || '').trim().slice(0, 300),
+    body: String(body).trim().slice(0, 10000),
+    lang: res.locals.lang
+  };
+  m.id = db.prepare('INSERT INTO messages (name,email,subject,body) VALUES (?,?,?,?)')
+    .run(m.name, m.email, m.subject, m.body).lastInsertRowid;
+  // Send the emails in the background; the message is already saved either way.
+  sendSupportEmails(m).catch(err => console.error('[mail] request #' + m.id + ' failed:', err.message));
+  res.redirect(res.locals.url('/kontakt') + '?sent=' + m.id);
 }
 
 /* Route table — the same handlers mounted for German and English URLs. */
@@ -90,6 +121,7 @@ const routes = [
   ['/ueber-uns', page('who')], ['/vision', page('vision')], ['/investieren', page('invest')],
   ['/probiotika', page('probiotics')], ['/team', page('team')],
   ['/blog', blog], ['/blog/:slug', post], ['/kontakt', contactGet],
+  ['/support', (req, res) => res.redirect(res.locals.url('/kontakt') + '#support-form')],
   ['/impressum', page('imprint')], ['/datenschutz', page('privacy')]
 ];
 

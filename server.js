@@ -13,6 +13,7 @@ const session = require('express-session');
 
 const app = express();
 require('./seed');
+app.set('trust proxy', 1); // Render sits in front of the app; needed for the visitor's real IP
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));

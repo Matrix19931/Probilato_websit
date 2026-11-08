@@ -9,14 +9,17 @@
       <span class="small"><%= settings.contact_register %></span>
     </div>
   </div>
-  <div class="form-side">
-    <% if (sent) { %><div class="notice"><%= t.form_thanks %></div><% } %>
+  <div class="form-side" id="support-form">
+    <h2><%= t.support_title %></h2>
+    <p><%= t.support_intro %></p>
+    <% if (sent) { %><div class="notice"><%= t.form_thanks %><% if (ref) { %><br><strong><%= t.form_ref %>: #<%= ref %></strong><% } %></div><% } %>
     <% if (error) { %><div class="notice error"><%= error %></div><% } %>
     <form method="post" action="<%= url('/kontakt') %>">
       <label><%= t.form_name %><input name="name" value="<%= form.name || '' %>" required></label>
       <label><%= t.form_email %><input type="email" name="email" value="<%= form.email || '' %>" required></label>
       <label><%= t.form_subject %><input name="subject" value="<%= form.subject || '' %>"></label>
       <label><%= t.form_message %><textarea name="body" rows="7" required><%= form.body || '' %></textarea></label>
+      <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
       <button class="btn btn-primary" type="submit"><%= t.form_send %></button>
     </form>
   </div>

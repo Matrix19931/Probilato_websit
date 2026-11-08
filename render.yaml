@@ -14,6 +14,16 @@ services:
         sync: false
       - key: SESSION_SECRET
         generateValue: true
+      - key: SMTP_HOST
+        value: smtp.ionos.de
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_USER
+        value: support@probilato.com
+      - key: SMTP_PASS
+        sync: false
+      - key: SUPPORT_INBOX
+        value: support@probilato.com
     disk:
       name: probilato-data
       mountPath: /opt/render/project/src/data
