@@ -44,7 +44,7 @@ const settings = [
   ['rd_text',        'Homepage — research text', 'Unser Team aus Wissenschaftlerinnen, Mikrobiologen und Ernährungsexperten entwickelt innovative probiotische Stämme und funktionelle Rezepturen nach höchsten Qualitätsstandards.', 'Our team of scientists, microbiologists and nutrition experts develops innovative probiotic strains and functional formulations backed by quality standards.', 'textarea', 53],
 
   ['contact_title',    'Contact — title', 'Sprechen Sie mit uns', 'Talk to us', 'text', 60],
-  ['contact_email',    'Contact — email address', 'info@probilato.com', 'info@probilato.com', 'text', 61],
+  ['contact_email',    'Contact — email address', 'support@probilato.com', 'support@probilato.com', 'text', 61],
   ['contact_phone',    'Contact — phone number', '+49 123 456 7890', '+49 123 456 7890', 'text', 62],
   ['contact_address',  'Contact — address', 'Deutschland', 'Germany', 'text', 63],
   ['contact_register', 'Contact — company register', 'Handelsregister-Nr. HRB 123456', 'Commercial Register No. HRB 123456', 'text', 64],
@@ -89,8 +89,8 @@ const pages = [
     'Unser Team vereint Mikrobiologie, Lebensmitteltechnologie und Unternehmertum.',
     'Our team brings together microbiology, food technology and entrepreneurship.', 5],
   ['imprint', 'Impressum', 'Imprint', '', '',
-    'Probilato\nDeutschland\n\nHandelsregister-Nr. HRB 123456\nE-Mail: info@probilato.com\n\n(Bitte vollständige Angaben nach § 5 TMG hier ergänzen.)',
-    'Probilato\nGermany\n\nCommercial Register No. HRB 123456\nEmail: info@probilato.com\n\n(Please complete the legally required details here.)', 8],
+    'Probilato\nDeutschland\n\nHandelsregister-Nr. HRB 123456\nE-Mail: support@probilato.com\n\n(Bitte vollständige Angaben nach § 5 TMG hier ergänzen.)',
+    'Probilato\nGermany\n\nCommercial Register No. HRB 123456\nEmail: support@probilato.com\n\n(Please complete the legally required details here.)', 8],
   ['privacy', 'Datenschutz', 'Privacy Policy', '', '',
     'Diese Website speichert Nachrichten, die über das Kontaktformular gesendet werden (Name, E-Mail-Adresse, Betreff, Nachricht), um die Anfrage zu beantworten.\n\n(Bitte vollständige Datenschutzerklärung hier ergänzen.)',
     'This website stores messages sent through the contact form (name, email address, subject, message) in order to answer the enquiry.\n\n(Please complete the full privacy policy here.)', 9]
@@ -128,3 +128,8 @@ if (db.prepare('SELECT COUNT(*) n FROM posts').get().n === 0) {
 }
 
 console.log('Seed complete. Start the site with: npm start');
+
+/* The company address changed from info@ to support@probilato.com.
+   Update it in content that was already saved (only that address is touched). */
+db.prepare("UPDATE settings SET value_de = REPLACE(value_de, 'info@probilato.com', 'support@probilato.com'), value_en = REPLACE(value_en, 'info@probilato.com', 'support@probilato.com')").run();
+db.prepare("UPDATE pages SET body_de = REPLACE(body_de, 'info@probilato.com', 'support@probilato.com'), body_en = REPLACE(body_en, 'info@probilato.com', 'support@probilato.com')").run();
